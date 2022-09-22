@@ -1,0 +1,15 @@
+import { User as MedusaUser } from '@medusajs/medusa/dist';
+import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
+import { Entity as MedusaEntity } from 'medusa-extender';
+import { Store } from '../../store/entities/store.entity';
+
+@MedusaEntity({ override: MedusaUser })
+@Entity()
+export class User extends MedusaUser {
+    @Index()
+    @Column({ nullable: false })
+    store_id: string;
+
+    @JoinColumn({ name: 'store_id' })
+    store: Store;
+}
